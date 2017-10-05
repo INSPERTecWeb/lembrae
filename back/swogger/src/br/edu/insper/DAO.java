@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class DAO {
 		Map<String,Object> result = new HashMap<String,Object>();
 			try {
 				if (rs.first()){
-					user = new Users(rs.getInt("ID"),rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"));
+					user = new Users(rs.getInt("ID"),rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"), null);
 					System.out.println("Authing user: " + user.getEmail() + "| pass: " + user.getPassword());
 					if (Objects.equals(user.getPassword(), password)){
 						System.out.println("PASSWORD MATCHED, RESPONDING OK (200)");

@@ -1,16 +1,21 @@
 package br.edu.insper;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Users {   
 	private Integer id = 0;
 	private String email;
 	private String username; 
 	private String password;
+	private MultipartFile avatar;
 	
-	public Users(Integer id,String email,String username, String password){
+	public Users(Integer id,String email,String username, String password, MultipartFile avatar){
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.avatar = avatar;
+		
 	}
 	public Integer getId() {
 		return id;
@@ -35,6 +40,12 @@ public class Users {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	} 
+	public MultipartFile getAvatar() {
+		return avatar;
+	} 
+	public void setAvatar(MultipartFile avatar) {
+		this.avatar = avatar;
 	} 
 	
 }
