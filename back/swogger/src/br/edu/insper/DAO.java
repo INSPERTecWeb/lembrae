@@ -89,11 +89,12 @@ public class DAO {
 		Map<String,Object> result = new HashMap<String,Object>();
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(
-					"INSERT INTO Users(email,username,password) VALUES(?,?,?);"
+					"INSERT INTO Users(email,username,password, avatar) VALUES(?,?,?,?);"
 					);
 			stmt.setString(1, received.getString("email"));
 			stmt.setString(2, received.getString("username"));
 			stmt.setString(3, received.getString("password"));
+			stmt.setString(4, received.getString("avatar"));
 			stmt.execute();
 		} catch (SQLException e){
 			if (e.getErrorCode() == 1062){
@@ -109,7 +110,7 @@ public class DAO {
 			);
 			ResultSet rs = querystmt.executeQuery();
 			if (rs.first()){
-				Users user = new Users(rs.getInt("ID"),rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"));
+				Users user = new Users(rs.getInt("ID"),rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"), rs.getString("AVATAR"));
 				System.out.println("Created user: " + user.getEmail() + "| username: " + user.getUsername());
 				result.put("user",user);
 				callback.Callback(result);

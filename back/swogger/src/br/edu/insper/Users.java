@@ -7,9 +7,10 @@ public class Users {
 	private String email;
 	private String username; 
 	private String password;
-	private MultipartFile avatar;
+//	private MultipartFile avatar;
+	private String avatar;
 	
-	public Users(Integer id,String email,String username, String password, MultipartFile avatar){
+	public Users(Integer id,String email,String username, String password, String avatar){
 		this.id = id;
 		this.email = email;
 		this.username = username;
@@ -41,10 +42,10 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	} 
-	public MultipartFile getAvatar() {
+	public String getAvatar() {
 		return avatar;
 	} 
-	public void setAvatar(MultipartFile avatar) {
+	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	} 
 	
