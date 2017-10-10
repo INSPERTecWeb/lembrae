@@ -27,8 +27,18 @@ class Note extends Component {
         this.delayedUpdate = debounce(this.update, 3000)
     }
 
+    componentWillMount(){
+        console.log('Componente será montado')
+        console.log(this.state.content)
+        //Devemos pegar o state.content parsear, verificar se há um link do spotify.
+        //Se houver, encapsular ele com um <iframe>
+        //Se houver outro link a não ser do spotify, encapsular com um div que permite a pre vizualização (trello)
+
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState(nextProps.info)
+        
     }
 
     handleOptionsOpen = (event) => {
