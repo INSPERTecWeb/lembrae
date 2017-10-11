@@ -28,8 +28,14 @@ class Note extends Component {
     }
 
     componentWillMount(){
-        console.log('Componente será montado')
-        console.log(this.state.content)
+        var spotifyUri = require('spotify-uri');
+        var parsed, uri;
+
+        let conteudo = this.state.content
+        var parsed = spotifyUri.parse(conteudo);
+        var uri = spotifyUri.formatEmbedURL(parsed);
+        console.log(uri);
+        this.state.content = '<iframe src=' + uri + 'width="200" height="100" frameborder="0" allowtransparency="true"></iframe>'
         //Devemos pegar o state.content parsear, verificar se há um link do spotify.
         //Se houver, encapsular ele com um <iframe>
         //Se houver outro link a não ser do spotify, encapsular com um div que permite a pre vizualização (trello)
