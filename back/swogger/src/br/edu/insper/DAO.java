@@ -31,7 +31,7 @@ public class DAO {
 		} 
 		try {
 			this.connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost/notesdb?verifyServerCertificate=false&useSSL=true", "root", "timl1550s");
+					"jdbc:mysql://localhost/notesdb", "root", "1170");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
