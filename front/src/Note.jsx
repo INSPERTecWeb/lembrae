@@ -15,6 +15,7 @@ import YouTube from 'react-youtube';
 
 const debounce = require('lodash/debounce');
 const omit = require('lodash/omit')
+const spotifyUri = require('spotify-uri');
 
 class Note extends Component {
     constructor(props) {
@@ -33,8 +34,41 @@ class Note extends Component {
         this.delayedUpdate = debounce(this.update, 3000)
     }
 
+    componentWillMount(){
+        let parsed, uri;
+        let conteudo = this.state.content
+        if (/((?:https\:\/\/)|(?:http\:\/\/)|(?:www\.))?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(?:\??)[a-zA-Z0-9\-\._\?\,\'\/\\\+&%\$#\=~]+)/.test(conteudo)) { /* return true */ 
+            console.log("URL detectada");
+
+            var source = (conteudo || '').toString();
+            var urlArray = [];
+            var url;
+            var matchArray;
+            var regexToken = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]+@([\w][\w\-]+\.)+[a-zA-Z]{2,3})/g;
+            // Iterate through any URLs in the text.
+            while( (matchArray = regexToken.exec( source )) !== null ){
+                var token = matchArray[0];
+                urlArray.push( token );
+            }
+            console.log("URL extraida");
+            var url = urlArray[0]
+            if(/^(spotify:|https:\/\/[a-z]+\.spotify\.com\/)/.test(url)){
+                console.log("Spotify URL detectada")
+                parsed = spotifyUri.parse(url);
+                uri = spotifyUri.formatEmbedURL(parsed);
+                this.setState({ content : '<iframe src="' + uri + '" width="200" height="100" frameborder="0" allowtransparency="true"></iframe>'})
+            } else {
+                this.setState({ content : '<a href="' + url + '">'+ url +'</a><div class="box"><iframe src="'+ url +'" width = "100%" height = "100%"></iframe></div>'}) 
+            }
+        } else {
+            console.log("URL não detectada");
+            this.setState({ content : this.state.content})
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState(nextProps.info)
+        
     }
 
     parseYoutubeIds(){
