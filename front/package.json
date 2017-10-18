@@ -12,7 +12,8 @@
     "react-masonry-component": "^5.0.7",
     "react-scripts": "1.0.11",
     "react-tap-event-plugin": "^2.0.1",
-    "react-tooltip": "^3.3.0"
+    "react-tooltip": "^3.3.0",
+    "react-youtube": "^7.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

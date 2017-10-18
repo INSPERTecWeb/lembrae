@@ -179,6 +179,12 @@ class Navbar extends Component {
                     onClick={() => { this.props.setFilter('mine') }}
                 />
 
+                <MenuItem style={{marginTop:20}}
+                    leftIcon={<FontIcon className="material-icons">check</FontIcon>}
+                    primaryText='Concluídas'
+                    onClick={() => { this.props.setFilter('concluded') }}
+                />
+
                 {/* final da navbar */}
                 <div className='sidebar-bottom-item'>
                     <Divider/>

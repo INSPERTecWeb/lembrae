@@ -37,11 +37,29 @@ public class Notes extends HttpServlet {
 		Integer uid = Integer.decode(request.getParameter("uid"));
 		System.out.print("User " + request.getParameter("user") + " Requested " + notesQuery);
 		DAO dao = new DAO();
-		dao.getNotes(uid, notesQuery,
-				(Map<String,Object> result) -> {
+		dao.getNotes(uid, notesQuery,(Map<String,Object> result) -> {
 					@SuppressWarnings("unchecked")
 					List<Note> resultList = (List<Note>) result.get("notes");
-					JSONArray res = new JSONArray(resultList);
+					JSONArray res = new JSONArray();
+					for (int i=0; i<resultList.size(); i++) {
+						JSONObject test = new JSONObject();
+						test.put("commentary", resultList.get(i).getCommentary());
+						test.put("lastUser", resultList.get(i).getlastUser());
+						test.put("createdAt", resultList.get(i).getCreatedAt());
+						test.put("color", resultList.get(i).getColor());
+						test.put("ownerUsername", resultList.get(i).getOwnerUsername());
+						test.put("id", resultList.get(i).getId());
+						test.put("isPrivate", resultList.get(i).getIsPrivate());
+						test.put("isConcluded", resultList.get(i).getIsConcluded());
+						test.put("title", resultList.get(i).getTitle());
+						test.put("userId", resultList.get(i).getUserId());
+						test.put("content", resultList.get(i).getContent());
+						test.put("updatedAt", resultList.get(i).getUpdatedAt());
+//						System.out.println(resultList.get(0).getlastUser());
+//						System.out.println(test.toString());
+						res.put(test);
+					}
+					
 					try {
 						response.getWriter().println(res);
 					} catch (IOException e) {

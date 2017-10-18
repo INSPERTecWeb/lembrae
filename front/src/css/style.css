@@ -108,6 +108,10 @@ input {
   margin: 0 20px 0 20px;
 }
 
+.note-input-commentary{
+  word-wrap: break-word;
+}
+
 .note-input-title {
   word-wrap: break-word;
   width: 95% !important;

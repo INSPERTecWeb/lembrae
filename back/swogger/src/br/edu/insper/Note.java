@@ -10,11 +10,14 @@ public class Note {
 	private String content;
 	private String color;
 	private Boolean isPrivate;
+	private Boolean isConcluded;
+	private String commentary;
 	private String ownerUsername;
 	private String title;
+	private String lastUser;
 	
 	public Note(Integer id,Integer userId,Timestamp createdAt,Timestamp updatedAt,String content,String color,
-			Boolean isPrivate,String ownerUsername,String title){
+			Boolean isPrivate, Boolean isConcluded, String commentary, String ownerUsername,String title, String lastUser){
 		this.id = id;
 		this.userId = userId;
 		this.createdAt = createdAt.getTime();
@@ -22,8 +25,11 @@ public class Note {
 		this.content = content;
 		this.color = color;
 		this.isPrivate = isPrivate;
+		this.isConcluded = isConcluded;
+		this.commentary = commentary;
 		this.ownerUsername = ownerUsername;
 		this.title = title;
+		this.lastUser = lastUser;
 	}
 
 	public Integer getId() {
@@ -81,6 +87,22 @@ public class Note {
 	public void setIsPrivate(Boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
+	
+	public Boolean getIsConcluded() {
+		return isConcluded;
+	}
+
+	public void setIsConcluded(Boolean isConcluded) {
+		this.isConcluded = isConcluded;
+	}
+	
+	public String getCommentary() {
+		return commentary;
+	}
+
+	public void setCommentary(String commentary) {
+		this.commentary = commentary;
+	}
 
 	public String getOwnerUsername() {
 		return ownerUsername;
@@ -94,8 +116,25 @@ public class Note {
 		this.title = title;
 	}
 	
+	
 	public String getTitle(){
-		return this.title;
+		return title;
+	}
+	
+	public String getlastUser(){
+		return lastUser;
+	}
+	
+	public void setlastUser(String lastUser){
+		this.lastUser = lastUser;
+	}
+	
+	public String getlastUser(){
+		return this.lastUser;
+	}
+	
+	public void setlastUser(String lastUser){
+		this.lastUser = lastUser;
 	}
 	
 
