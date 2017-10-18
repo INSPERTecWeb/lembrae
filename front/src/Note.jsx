@@ -12,6 +12,7 @@ import ReactMarkdown from'react-markdown';
 
 const debounce = require('lodash/debounce');
 const omit = require('lodash/omit')
+const spotifyUri = require('spotify-uri');
 
 class Note extends Component {
     constructor(props) {
@@ -28,18 +29,38 @@ class Note extends Component {
     }
 
     componentWillMount(){
-        var spotifyUri = require('spotify-uri');
-        var parsed, uri;
-
+        let parsed, uri;
         let conteudo = this.state.content
-        var parsed = spotifyUri.parse(conteudo);
-        var uri = spotifyUri.formatEmbedURL(parsed);
-        console.log(uri);
-        this.state.content = '<iframe src=' + uri + 'width="200" height="100" frameborder="0" allowtransparency="true"></iframe>'
-        //Devemos pegar o state.content parsear, verificar se há um link do spotify.
-        //Se houver, encapsular ele com um <iframe>
-        //Se houver outro link a não ser do spotify, encapsular com um div que permite a pre vizualização (trello)
+        if (/((?:https\:\/\/)|(?:http\:\/\/)|(?:www\.))?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(?:\??)[a-zA-Z0-9\-\._\?\,\'\/\\\+&%\$#\=~]+)/.test(conteudo)) { /* return true */ 
+            console.log("URL detectada");
 
+            var source = (conteudo || '').toString();
+            var urlArray = [];
+            var url;
+            var matchArray;
+            var regexToken = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]+@([\w][\w\-]+\.)+[a-zA-Z]{2,3})/g;
+            // Iterate through any URLs in the text.
+            while( (matchArray = regexToken.exec( source )) !== null ){
+                var token = matchArray[0];
+                urlArray.push( token );
+            }
+            console.log("URL extraida");
+            var url2 = urlArray[0]
+            var url1 = urlArray[0]
+            if(/^(spotify:|https:\/\/[a-z]+\.spotify\.com\/)/.test(url2)){
+                console.log("Spotify URL detectada")
+                parsed = spotifyUri.parse(url2);
+                uri = spotifyUri.formatEmbedURL(parsed);
+                this.setState({ content : '<iframe src="' + uri + '" width="200" height="100" frameborder="0" allowtransparency="true"></iframe>'})
+            } else {
+                //this.setState({ content : '<iframe src="' + url1 + '" width = "200px" height = "200px"></iframe>'})
+                // <a href="http://en.wikipedia.org/">Wikipedia</a><div class="box"><iframe src="http://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div> 
+                this.setState({ content : '<a href="'+url1+'">'+url+'</a>'})
+            }
+        } else {
+            console.log("URL não detectada");
+            this.setState({ content : this.state.content})
+        }
     }
 
     componentWillReceiveProps(nextProps) {
