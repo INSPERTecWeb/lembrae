@@ -45,17 +45,14 @@ class Note extends Component {
                 urlArray.push( token );
             }
             console.log("URL extraida");
-            var url2 = urlArray[0]
-            var url1 = urlArray[0]
-            if(/^(spotify:|https:\/\/[a-z]+\.spotify\.com\/)/.test(url2)){
+            var url = urlArray[0]
+            if(/^(spotify:|https:\/\/[a-z]+\.spotify\.com\/)/.test(url)){
                 console.log("Spotify URL detectada")
-                parsed = spotifyUri.parse(url2);
+                parsed = spotifyUri.parse(url);
                 uri = spotifyUri.formatEmbedURL(parsed);
                 this.setState({ content : '<iframe src="' + uri + '" width="200" height="100" frameborder="0" allowtransparency="true"></iframe>'})
             } else {
-                //this.setState({ content : '<iframe src="' + url1 + '" width = "200px" height = "200px"></iframe>'})
-                // <a href="http://en.wikipedia.org/">Wikipedia</a><div class="box"><iframe src="http://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div> 
-                this.setState({ content : '<a href="'+url1+'">'+url+'</a>'})
+                this.setState({ content : '<a href="' + url + '">'+ url +'</a><div class="box"><iframe src="'+ url +'" width = "100%" height = "100%"></iframe></div>'}) 
             }
         } else {
             console.log("URL não detectada");
