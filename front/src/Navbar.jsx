@@ -9,6 +9,7 @@ import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
 
 import logo from './logo.png';
 import auth from './helpers/auth.js'
@@ -131,11 +132,7 @@ class Navbar extends Component {
                     <FlatButton style={{height:'auto',lineHeight:'none'}}
                         onTouchTap={this.handleTouchTap}
                         hoverColor={ 'rgba(130,130,130,0.1)' }>
-                        <Avatar
-                        src={ auth.getUser().avatar }
-                        size={30}
-                        className='user-avatar'
-                        />
+                        <Avatar src={this.state.photoURL} className='userImg' />
                         <Popover
                             open={this.state.open}
                             anchorEl={this.state.anchorEl}
@@ -188,6 +185,19 @@ class Navbar extends Component {
                     primaryText='Concluídas'
                     onClick={() => { this.props.setFilter('concluded') }}
                 />
+
+
+                <TextField style={{marginTop:20}}
+
+                    id="search" 
+                    value={this.state.inputText}
+                    onChange={this.handleInputChange}
+                    className='note-input-text'
+                    placeholder='Filtrar por nome de usuario'
+                    onInput={() => { this.props.setFilter('others') }} 
+                    color="black"
+                    inputStyle={{color: "rgba(0,0,0,1)",zIndex: "0",left: "5px"}} 
+                    />
 
                 {/* final da navbar */}
                 <div className='sidebar-bottom-item'>
