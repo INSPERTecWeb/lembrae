@@ -6,6 +6,7 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+<<<<<<< HEAD
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -16,6 +17,8 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+=======
+>>>>>>> master
 			<name>org.eclipse.wst.validation.validationbuilder</name>
 			<arguments>
 			</arguments>
@@ -23,7 +26,10 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+<<<<<<< HEAD
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+=======
+>>>>>>> master
 	</natures>
 </projectDescription>

@@ -53,6 +53,7 @@ public class Login extends HttpServlet {
 		JSONObject payload = obj.getJSONObject("payload");
 		System.out.println(payload);
 		DAO dao = new DAO();
+		
 		// response
 		JSONObject res = new JSONObject();
 		dao.auth(payload.getString("email"), payload.getString("password"), 
