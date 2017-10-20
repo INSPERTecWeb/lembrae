@@ -114,7 +114,7 @@ export default window.store = {
             })
     },
     
-    Note : (title,content,color,isPrivate, isConcluded, commentary, lastUser) => {
+    Note : (title,content,color,isPrivate, isConcluded, commentary, lastUser, lastAvatar) => {
         return {
             color : color,
             content : content,
@@ -123,7 +123,8 @@ export default window.store = {
             commentary: commentary,
             lastUser: lastUser,
             userId : auth.getUser().id,
-            title : title
+            title : title,
+            lastAvatar : lastAvatar
         }
     },
 

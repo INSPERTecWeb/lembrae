@@ -172,6 +172,12 @@ class NotesContainer extends Component {
                 return _.filter(_.values(this.state.data).reverse(), (o) => {
                     return o.isConcluded !== false
                 })
+            } else if (filter == 'others'){
+                return _.filter(_.values(this.state.data).reverse(), (o) => {
+                    //var name = document.getElementById("search").value;
+                    //debug.log(name + "   ---   " + name.indexOf(o.ownerUsername) !== -1)
+                    return o.ownerUsername.indexOf(document.getElementById("search").value) !== -1; 
+                })
             }
         }
 

@@ -11,7 +11,7 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import _ from 'lodash'
-
+import Avatar from 'material-ui/Avatar'
 import Home from './Home'
 
 class App extends Component {
@@ -22,6 +22,8 @@ class App extends Component {
       open : false,
       error : '',
       dialogState : 'login',
+      imageFile : null,
+      imageBlob : 'https://www.colorado.edu/ocg/sites/default/files/styles/small/public/people/person-placeholder_34.jpg?itok=XHQXiJa4',
       textFields : {
         email : '',
         password : '',
@@ -67,7 +69,7 @@ class App extends Component {
   }
 
   handleRegister = () => {
-    auth.register(this.state.textFields.email,this.state.textFields.userName,this.state.textFields.password,(result) => {
+    auth.register(this.state.textFields.email,this.state.textFields.userName,this.state.textFields.password, this.state.imageBlob,(result) => {
       if (result.status == "SUCCESS"){
         this.setState({ open:false, auth: auth.getUser() })
       } else if (result.status == "FAILURE"){
@@ -81,6 +83,21 @@ class App extends Component {
       this.setState({ dialogState : 'register' })
     } else {
       this.setState({ dialogState : 'login' })
+    }
+  }
+
+  onFileChange = () => {
+    let file = this.fileInput.files[0]
+    let reader  = new FileReader();
+    console.log(file)
+
+    reader.addEventListener("load",  () => {
+      this.setState({ imageBlob : reader.result, imageFile : file })
+      
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
     }
   }
 
@@ -167,9 +184,22 @@ class App extends Component {
                   }
                 }}
               />
+              <Avatar
+                className='login-avatar'
+                src={this.state.imageBlob} 
+                onClick={() => { this.fileInput.click() }}
+              />
+              <input 
+                name="myFile" 
+                style={{display : 'none'}} 
+                type="file" 
+                ref={(input) => { this.fileInput = input }} 
+                onChange={this.onFileChange} 
+              />
               <div className='centered col s12' style={{color : 'red'}}>
                 {this.state.error}
               </div>
+
               <div className='centered col s12' style={{marginTop:10}}>
                 <FlatButton
                   label="Registrar"

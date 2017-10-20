@@ -11,6 +11,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import moment from 'moment'
 import ReactMarkdown from'react-markdown';
+import Avatar from 'material-ui/Avatar'
 import YouTube from 'react-youtube';
 
 const debounce = require('lodash/debounce');
@@ -106,6 +107,7 @@ class Note extends Component {
         if (this.state[e.currentTarget.id] != e.target.value) {
             this.setState({ [e.currentTarget.id]: e.target.value });
             this.setState({lastUser: auth.getUser().username})
+            this.setState({lastAvatar: auth.getUser().avatar})
             this.delayedUpdate()
             
         }
@@ -157,7 +159,8 @@ class Note extends Component {
 
     update = () => {
         if (this.exists) {
-            let updatedState = omit(this.state,['open','anchorEl'])
+            this.setState({ showEditableContent: false })
+            let updatedState = omit(this.state, ['open', 'anchorEl'])
             this.props.update(updatedState)
         }
     }
@@ -182,9 +185,9 @@ class Note extends Component {
                     {auth.getUser().id === this.state.userId ?
                         <div>
                         <MenuItem
-                        leftIcon={<FontIcon className="material-icons" > delete_forever </FontIcon>}
-                        primaryText="Remover nota"
-                        onClick={this.handleRemove} />
+                            leftIcon={<FontIcon className="material-icons" > delete_forever </FontIcon>}
+                            primaryText="Remover nota"
+                            onClick={this.handleRemove} />
 
                         <MenuItem
                             onClick={this.handleLockPress}
@@ -243,6 +246,7 @@ class Note extends Component {
                                 html={this.state.title}
                                 disabled={this.state.isPrivate}
                                 onChange={this.handleChange}
+                                style={{ wordWrap: 'break-word' }}
                             />
                             <IconButton onClick={this.handleOptionsOpen}>
                                 <FontIcon className="material-icons" > more_vert </FontIcon>
@@ -271,9 +275,29 @@ class Note extends Component {
                         <div className='divider' />
                         <div className='card-footer'>
                             {moment(this.state.updatedAt).isSame(moment(this.state.createdAt))
-                                ? <span> Criado por <b>{this.state.ownerUsername} </b> {moment(this.state.createdAt).fromNow()} </span>
-                                : <span> Atualizado por <b>{this.state.lastUser}</b> {moment(this.state.updatedAt).fromNow()} </span>
+                                ? <span> Criado por <b>{this.state.ownerUsername} </b> 
+                                <Avatar
+                                src={this.state.ownerAvatar}
+                                size={30}
+                                className='user-avatar'
+                                />
+                            {moment(this.state.createdAt).fromNow()} </span>
+                                
+                                : <span> Criado por <b>{this.state.ownerUsername} </b> 
+                                <Avatar
+                                src={this.state.ownerAvatar}
+                                size={30}
+                                className='user-avatar'
+                                />
+                                Atualizado por <b>{this.state.lastUser}</b> 
+                                <Avatar
+                                src={this.state.lastAvatar}
+                                size={30}
+                                className='user-avatar'
+                                />
+                                {moment(this.state.updatedAt).fromNow()} </span>
                             }
+                            
                             <div style={{ textAlign: 'right' }}>
                             </div>
                         </div>

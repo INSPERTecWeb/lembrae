@@ -13,7 +13,7 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Filipe Borba/Desktop/Coisas/mysql-connector-java-5.1.43/mysql-connector-java-5.1.43-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Filipe Borba/Desktop/Coisas/apache-tomcat-9.0.1/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/home/bruna/Documentos/Bruna/Insper/4 semestre/Tec Web/mysql-connector-java-5.1.43/mysql-connector-java-5.1.43/mysql-connector-java-5.1.43-bin.jar"/>
+	<classpathentry kind="lib" path="/home/bruna/Documentos/Bruna/Insper/4 semestre/Tec Web/apache-tomcat-8.0.46/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
